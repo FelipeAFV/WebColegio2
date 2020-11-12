@@ -16,6 +16,10 @@
         <servlet-name>ListarNotasServlet</servlet-name>
         <servlet-class>controlador.ListarNotasServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Menuprofserv</servlet-name>
+        <servlet-class>controlador.Menuprofserv</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ListarNotasServlet</servlet-name>
         <url-pattern>/ListarNotasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Menuprofserv</servlet-name>
+        <url-pattern>/Menuprofserv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
