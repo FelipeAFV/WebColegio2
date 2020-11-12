@@ -17,21 +17,22 @@ import java.util.logging.Logger;
  * @author f_fig
  */
 public class Sesion {
-    /*
+
     private static Sesion sesion;
-    private Usuario usuario;
-    
+    private User usuario;
+
     private Sesion() {
-        
+
     }
+
     public static void main(String[] args) {
-       
+
     }
-    
-    private Sesion(Usuario usuario) {
+
+    private Sesion(User usuario) {
         this.usuario = usuario;
     }
-    
+
     public static Sesion obtenerSesionActual() {
         if (sesion != null) {
             return sesion;
@@ -39,13 +40,13 @@ public class Sesion {
             return new Sesion();
         }
     }
-    
-    /*public static Usuario validarUsuario(String usuario, String contraseña, String cargo) {
-        
-        Usuario us =null;
+
+    public static User validarUsuario(String usuario, String contraseña, String cargo) {
+
+        User us = null;
         Connection con = Conexion.obtenerConexion();
         String query = "SELECT * FROM ? WHERE login = ? AND contraseña = ? ";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, cargo);
@@ -54,34 +55,26 @@ public class Sesion {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 //Crear el usuario para almacenarlo en la sesion
+                us = new User();
+                us.setId(rs.getInt("id"));
                 Sesion.obtenerSesionActual().setUsuario(us);
                 return us;
             } else {
                 return null;
             }
-            
+
         } catch (SQLException ex) {
-            return; 
+            return null;
         }
-        if (cargo == "Profesor") {
-            
-        } else if ( cargo == "Alumno") {
-            
-        } else if ( cargo == "Administrador") {
-            
-        }
-        
+
     }
 
-    public Usuario getUsuario() {
+    public User getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(User usuario) {
         this.usuario = usuario;
-    }*/
-    
-    
-    
-    
+    }
+
 }

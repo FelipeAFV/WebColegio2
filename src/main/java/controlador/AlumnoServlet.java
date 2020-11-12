@@ -39,7 +39,7 @@ public class AlumnoServlet extends HttpServlet {
         
         String accion = request.getParameter("accion");
         if (accion.equals("Listar Alumnos")) {
-            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(Sesion.obtenerSesionActual().getUsuario().getID());
+            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(Sesion.obtenerSesionActual().getUsuario().getId());
             request.setAttribute("alumnos", alumnos );
             getServletContext().getRequestDispatcher("/VistaListarAlumnos.jsp").forward(request, response);
         } else if (accion.equals("Listar Notas")) {

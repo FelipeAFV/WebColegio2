@@ -27,8 +27,8 @@
                 while (itr.hasNext()) {
                     AlumnoDTO alum = (AlumnoDTO) itr.next();%>  
             <tr>
-                <td><%%></td>
-                <td><%%></td>
+                <td><%=alum.getNombre()%></td>
+                <td><%=alum.getApellido()%></td>
             </tr>
 
             <%}%>
