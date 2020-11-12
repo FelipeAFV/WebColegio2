@@ -13,16 +13,13 @@
     </head>
     <body>
         <h1>Sistema alumno</h1>
-        <form method="get" action="ListarAlumnoServlet">
-            <input id="listarAlumnos" type="submit" value="Listar Alumnos"></input>
+        <form method="get" action="AlumnoServlet">
+            <input id="listarAlumnos" type="submit" name="accion" value="Listar Alumnos"></input>
+     
+            <input id="listarProfesores" type="submit" name="accion"  value="Listar Profesores"></input>
+
+            <input id="listarNotas" type="submit"name="accion"  value="Listar Notas"></input>
         </form>
-        </br>
-        <form method="get" action="ListarProfesoresServlet">
-            <input id="listarProfesores" type="submit" value="Listar Profesores"></input>
-        </form>
-        </br>
-        <form method="get" action="ListarNotasServlet">
-            <input id="listarNotas" type="submit" value="Listar Notas"></input>
-        </form>
+       
     </body>
 </html>

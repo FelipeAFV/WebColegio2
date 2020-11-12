@@ -17,6 +17,10 @@
         <servlet-class>controlador.ListarNotasServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AlumnoServlet</servlet-name>
+        <servlet-class>controlador.AlumnoServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Menuprofserv</servlet-name>
         <servlet-class>controlador.Menuprofserv</servlet-class>
     </servlet>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>ListarNotasServlet</servlet-name>
         <url-pattern>/ListarNotasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlumnoServlet</servlet-name>
+        <url-pattern>/AlumnoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Menuprofserv</servlet-name>

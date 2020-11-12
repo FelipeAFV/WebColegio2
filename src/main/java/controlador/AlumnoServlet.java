@@ -5,20 +5,26 @@
  */
 package controlador;
 
+import dao.AlumnoBBDD;
+import dao.AlumnoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.AlumnoDTO;
 import modelo.Sesion;
 
 /**
  *
  * @author f_fig
  */
-public class LoginServlet extends HttpServlet {
+public class AlumnoServlet extends HttpServlet {
 
+    
+    private AlumnoDAO alumDAO;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,37 +38,18 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        PrintWriter out = response.getWriter();
-        
-        String usuario = request.getParameter("usuario");
-        String contraseña = request.getParameter("contraseña");
-        String cargo = request.getParameter("cargo");
-        if(Sesion.validarUsuario(usuario, contraseña, cargo) != null) {
-            if (cargo == "Profesor") {
-                response.sendRedirect("/VistaProfesor");
-            } else if (cargo == "Alumno") {
-                response.sendRedirect("/VistaAlumno");
-            } else if (cargo == "Admin"){
-                response.sendRedirect("/VistaAdmin");
-            }
-        } else {
-            response.sendRedirect("/VistaError");
+        String accion = request.getParameter("accion");
+        alumDAO = new AlumnoBBDD();
+        if (accion.equals("Listar Alumnos")) {
+            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(12);
+            request.setAttribute("alumnos", alumnos );
+            getServletContext().getRequestDispatcher("/VistaListarAlumnos.jsp").forward(request, response);
+        } else if (accion.equals("Listar Notas")) {
+            
+        } else if (accion.equals("Listar Profesores")) {
+            
         }
-        
-        try {
-           
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Radio button seleccionado " + request.getParameter("cargo")+ "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
