@@ -63,8 +63,15 @@ public class Menuprofserv extends HttpServlet {
         if(accion.equalsIgnoreCase("listarprofesores")){
             RequestDispatcher vista = request.getRequestDispatcher("VistaProfesor.jsp");
             vista.forward(request, response);
-        }else{
+        }else if(accion.equalsIgnoreCase("listaralumnos")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoralumnos.jsp");
+            vista.forward(request, response);
             
+        }else if(accion.equalsIgnoreCase("goasignatura")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaporasignatura.jsp");
+            vista.forward(request, response);
+            
+        }else{
             processRequest(request, response);
         }
         

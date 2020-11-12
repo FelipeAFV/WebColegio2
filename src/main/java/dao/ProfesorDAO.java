@@ -14,4 +14,5 @@ import java.util.List;
 public interface ProfesorDAO {
     public List listar();
     public List listarasignaturas();
+    public List listaralumnosasignatura(int idasig);
 }
