@@ -28,10 +28,6 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
-<<<<<<< HEAD
-        
-=======
->>>>>>> master
     </dependencies>
     
      <build>

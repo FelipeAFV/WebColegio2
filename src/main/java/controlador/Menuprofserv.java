@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Sesion;
 
 /**
  *
@@ -63,6 +64,7 @@ public class Menuprofserv extends HttpServlet {
             RequestDispatcher vista = request.getRequestDispatcher("VistaProfesor.jsp");
             vista.forward(request, response);
         }else{
+            
             processRequest(request, response);
         }
         
