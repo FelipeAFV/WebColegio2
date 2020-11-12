@@ -17,8 +17,13 @@
         <servlet-class>controlador.ListarNotasServlet</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>AlumnoServlet</servlet-name>
         <servlet-class>controlador.AlumnoServlet</servlet-class>
+=======
+        <servlet-name>Menuprofserv</servlet-name>
+        <servlet-class>controlador.Menuprofserv</servlet-class>
+>>>>>>> 4d4058c3d689c0049d61e38ca0ef3a2f17b85642
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -37,8 +42,13 @@
         <url-pattern>/ListarNotasServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
+=======
+        <servlet-name>Menuprofserv</servlet-name>
+        <url-pattern>/Menuprofserv</url-pattern>
+>>>>>>> 4d4058c3d689c0049d61e38ca0ef3a2f17b85642
     </servlet-mapping>
     <session-config>
         <session-timeout>
