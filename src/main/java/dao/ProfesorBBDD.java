@@ -9,6 +9,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.AsignaturaDTO;
 import modelo.ProfesorDTO;
 
 /**
@@ -22,14 +23,14 @@ public class ProfesorBBDD implements ProfesorDAO{
         try{
             ArrayList<ProfesorDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","hr","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM employees");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM profesor");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 ProfesorDTO prof = new ProfesorDTO();
-                prof.setId(rs.getInt("employee_id"));
-                prof.setName(rs.getString("first_name"));
-                prof.setLast_name(rs.getString("last_name"));
+                prof.setId(rs.getInt("id"));
+                prof.setName(rs.getString("nombre"));
+                prof.setLast_name(rs.getString("apellido"));
                 lista.add(prof);
             }
             return lista;
@@ -37,6 +38,28 @@ public class ProfesorBBDD implements ProfesorDAO{
             return null;
         }
         
+        
+    }
+
+    @Override
+    public List listarasignaturas() {
+        
+        try{
+            ArrayList<AsignaturaDTO> lista = new ArrayList<>();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura WHERE profesor_id = 4");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                AsignaturaDTO asig = new AsignaturaDTO();
+                asig.setId(rs.getInt("id"));
+                asig.setNombre(rs.getString("nombre"));
+                lista.add(asig);
+            }
+            return lista;
+        }catch(ClassNotFoundException | SQLException e){
+            return null;
+        }
         
     }
     
