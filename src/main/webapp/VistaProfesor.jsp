@@ -4,6 +4,8 @@
     Author     : samuel
 --%>
 
+<%@page import="modelo.Conexion"%>
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +15,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
     </body>
 </html>

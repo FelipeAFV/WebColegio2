@@ -4,6 +4,7 @@
     Author     : f_fig
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
         <h1>Inicio de sesión</h1>
         <form method="get" action="LoginServlet">
             
