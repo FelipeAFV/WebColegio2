@@ -5,13 +5,20 @@
  */
 package modelo;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author f_fig
  */
 public class Sesion {
-    
-    /*private static Sesion sesion;
+    /*
+    private static Sesion sesion;
     private Usuario usuario;
     
     private Sesion() {
@@ -33,9 +40,37 @@ public class Sesion {
         }
     }
     
-    public static Usuario validarUsuario(String usuario, String contraseña) {
+    /*public static Usuario validarUsuario(String usuario, String contraseña, String cargo) {
         
-        return new Alumno();
+        Usuario us =null;
+        Connection con = Conexion.obtenerConexion();
+        String query = "SELECT * FROM ? WHERE login = ? AND contraseña = ? ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, cargo);
+            ps.setString(2, usuario);
+            ps.setString(3, contraseña);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                //Crear el usuario para almacenarlo en la sesion
+                Sesion.obtenerSesionActual().setUsuario(us);
+                return us;
+            } else {
+                return null;
+            }
+            
+        } catch (SQLException ex) {
+            return; 
+        }
+        if (cargo == "Profesor") {
+            
+        } else if ( cargo == "Alumno") {
+            
+        } else if ( cargo == "Administrador") {
+            
+        }
+        
     }
 
     public Usuario getUsuario() {

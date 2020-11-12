@@ -20,13 +20,12 @@
             <label>Contraseña</label>
             <input name="contraseña" type="text"></input></br>
             
-
             <input type="radio" id="profesor" name="cargo" value="Profesor">
             <label for="profesor">Profesor</label><br>
             <input type="radio" id="alumno" name="cargo" value="Alumno">
             <label for="alumno">Alumno</label><br>
             <input type="radio" id="admin" name="cargo" value="Administrador">
-            <label for="admin">Admin</label> 
+            <label for="admin">Admin</label></br> 
             
             
             <input value="Ingresar" type="submit"></input></br>

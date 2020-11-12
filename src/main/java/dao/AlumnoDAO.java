@@ -13,8 +13,8 @@ import modelo.AlumnoDTO;
  * @author f_fig
  */
 public interface AlumnoDAO {
-    
-    /*public ArrayList<Profesor> listarProfesores(int idAlumno);
+    /*
+    public ArrayList<Profesor> listarProfesores(int idAlumno);
     public ArrayList<AlumnoDTO> listarAlumnos(int idAlumno);
     public ArrayList<Nota> listarNotas(int idAlumno);
     */

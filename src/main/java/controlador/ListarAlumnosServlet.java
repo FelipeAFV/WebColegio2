@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.AlumnoDTO;
+import modelo.Sesion;
 
 /**
  *
  * @author f_fig
  */
 public class ListarAlumnosServlet extends HttpServlet {
-
+/*
     private AlumnoDAO alumDAO;
     
     /**
@@ -35,11 +36,11 @@ public class ListarAlumnosServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        /*int idAlumno = Integer.parseInt(request.getParameter("id"));
-        ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(idAlumno);
+        //int idAlumno = Integer.parseInt(request.getParameter("id"));
+        ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(Sesion.obtenerSesionActual().getUsuario().getId());
         try {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -48,25 +49,28 @@ public class ListarAlumnosServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletAlumno at " + request.getContextPath() + "</h1>");
+            out.println("<table>");
             out.println("<tr>");
             out.println("<th>Nombre</th>");
             out.println("<th>Apellido</th>");
             out.println("</tr>");
             Iterator itr = alumnos.iterator();
+            int cont = 0;
             while (itr.hasNext()) {
-                Alumno alum = (Alumno) itr.next();
+                AlumnoDTO alum = (AlumnoDTO) itr.next();
+                out.println("</br>");
                 out.println("<tr>");
-                out.println("<td>" + alum.getNombre() + "</td>");
-                out.println("<td>" + alum.getApellido() + "</td>");
+                out.println("<td>"+alum.getNombre()+"</td>");
+                out.println("<td>"+alum.getApellido()+"</td>");
                 out.println("</tr>");
-
             }
+            out.println("</table>");
 
             out.println("</body>");
             out.println("</html>");
         } finally {
             out.close();
-        }*/
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
