@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,31 +31,37 @@ public class AlumnoBBDD implements AlumnoDAO {
 
     @Override
     public ArrayList<AlumnoDTO> listarAlumnos(int idAlumno) {
-        Sesion sesion = Sesion.obtenerSesionActual();
-        int id = sesion.getUsuario().getId();
-
+        //Sesion sesion = Sesion.obtenerSesionActual();
+        //int id = sesion.getUsuario().getId();
+        Connection con = Conexion.obtenerConexion();
         try {
-            String query = "SELECT nombre, apellido FROM alumnos NATURAL JOIN matricula"
-                    + "WHERE asignatura_id IN(SELECT asignatura_id FROM alumnos"
-                    + " NATURAL JOIN matricula WHERE alumno_id = ?)";
-            PreparedStatement ps = Conexion.obtenerConexion().prepareStatement(query);
+            /*String query = "SELECT nombre, apellido FROM alumno a1 JOIN matricula m1 ON "
+                    + " m.alumno_id = a1.id = m1.alumno_id "
+                    + "WHERE asignatura_id IN(SELECT asignatura_id FROM alumno a"
+                    + "JOIN  matricula m ON a.id = m.alumno_id WHERE alumno_id = ?)";*/
+            String query2 = "SELECT * FROM employees";
+            PreparedStatement ps = con.prepareStatement(query2);
             ArrayList<AlumnoDTO> alumnos = new ArrayList<>();
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(query);
+            //ps.setInt(1, idAlumno);
+            ResultSet rs = ps.executeQuery(query2);
             while (rs.next()) {
-                int idAlum = rs.getInt("id");
-                String login = rs.getString("login");
-                String clave = rs.getString("clave");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int idNivel = rs.getInt("nivel_id");
-                AlumnoDTO al = new AlumnoDTO(id, login, clave, nombre, apellido,idNivel);
+                String nombre = rs.getString("first_name");
+                String apellido = rs.getString("last_name");
+                AlumnoDTO al = new AlumnoDTO();
+                al.setNombre(nombre);
+                al.setApellido(apellido);
                 alumnos.add(al);
 
             }
             return alumnos;
         } catch (SQLException ex) {
             return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import dao.AlumnoBBDD;
 import dao.AlumnoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,8 +39,9 @@ public class AlumnoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String accion = request.getParameter("accion");
+        alumDAO = new AlumnoBBDD();
         if (accion.equals("Listar Alumnos")) {
-            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(Sesion.obtenerSesionActual().getUsuario().getId());
+            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(12);
             request.setAttribute("alumnos", alumnos );
             getServletContext().getRequestDispatcher("/VistaListarAlumnos.jsp").forward(request, response);
         } else if (accion.equals("Listar Notas")) {

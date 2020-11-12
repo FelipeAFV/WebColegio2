@@ -4,6 +4,7 @@
     Author     : f_fig
 --%>
 
+<%@page import="dao.AlumnoBBDD"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.AlumnoDTO"%>
@@ -21,17 +22,22 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
             </tr>
-            <%  ArrayList<AlumnoDTO> alumnos = (ArrayList<AlumnoDTO>)request.getAttribute("alumnos");
-                Iterator itr = alumnos.iterator();
+            <%  
+                ArrayList<AlumnoDTO> alumnos = (ArrayList<AlumnoDTO>)request.getAttribute("alumnos");
                 
-                while (itr.hasNext()) {
-                    AlumnoDTO alum = (AlumnoDTO) itr.next();%>  
+                if (alumnos != null) {
+                    Iterator itr = alumnos.iterator();
+                    AlumnoDTO alum;
+                    while (itr.hasNext()) {
+                        alum = (AlumnoDTO) itr.next();
+            %>  
             <tr>
                 <td><%=alum.getNombre()%></td>
                 <td><%=alum.getApellido()%></td>
             </tr>
 
-            <%}%>
+            <%}}%>
+            
         </table>
 
     </body>
