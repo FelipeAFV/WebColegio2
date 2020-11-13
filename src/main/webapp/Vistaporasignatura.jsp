@@ -36,7 +36,7 @@
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
-                    List<AlumnoDTO> contenido = p.listaralumnosasignatura(1);
+                    List<AlumnoDTO> contenido = p.listaralumnosasignatura(Integer.parseInt(request.getParameter("id")));
                     Iterator<AlumnoDTO> iterador = contenido.iterator();
                     AlumnoDTO as = null;
                     while(iterador.hasNext()){
