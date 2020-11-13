@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Vistaporasignatura
-    Created on : 12-11-2020, 19:56:11
+    Document   : Vistaprofesorcheck
+    Created on : 13-11-2020, 11:15:06
     Author     : samuel
 --%>
 
@@ -35,8 +35,6 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Trimestre</th>
-                    <th>Nota</th>
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
@@ -50,8 +48,6 @@
                     <td><%= as.getId_alumno()%></td>
                     <td><%= as.getNombre()%></td>
                     <td><%= as.getApellido()%></td>
-                    <td><%= as.getTrimestre()%></td>
-                    <td><%= as.getNota()%></td>
                 </tr>
                 <%}%>
             </table>

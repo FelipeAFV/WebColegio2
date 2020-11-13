@@ -12,6 +12,7 @@ import java.util.List;
 import modelo.AlumnoDTO;
 import modelo.AsignaturaDTO;
 import modelo.ProfesorDTO;
+import modelo.ProfesorJoinDTO;
 
 /**
  *
@@ -68,16 +69,21 @@ public class ProfesorBBDD implements ProfesorDAO{
     public List listaralumnosasignatura(int idasig) {
         
         try{
-            ArrayList<AlumnoDTO> lista = new ArrayList<>();
+            ArrayList<ProfesorJoinDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura WHERE id = ?");
+            PreparedStatement stmt = conexion.prepareStatement("SELECT m.alumno_id,m.asignatura_id,al.nombre,al.apellido,m.trimestre,m.nota FROM asignatura a join matricula m on (a.id = m.asignatura_id) join alumno al on(m.alumno_id = al.id) WHERE a.id = ?");
             stmt.setInt(1, idasig);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                AlumnoDTO alum = new AlumnoDTO();
-                alum.setId(rs.getInt("id"));
-                lista.add(alum);
+                ProfesorJoinDTO profj = new ProfesorJoinDTO();
+                profj.setId_alumno(rs.getInt("alumno_id"));
+                profj.setId_asignatura(rs.getInt("asignatura_id"));
+                profj.setNombre(rs.getString("nombre"));
+                profj.setApellido(rs.getString("apellido"));
+                profj.setTrimestre(rs.getInt("trimestre"));
+                profj.setNota(rs.getDouble("nota"));
+                lista.add(profj);
             }
             return lista;
         }catch(ClassNotFoundException | SQLException e){

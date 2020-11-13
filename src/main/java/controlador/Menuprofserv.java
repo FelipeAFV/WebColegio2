@@ -63,7 +63,7 @@ public class Menuprofserv extends HttpServlet {
         if(accion.equalsIgnoreCase("listarprofesores")){
             RequestDispatcher vista = request.getRequestDispatcher("VistaProfesor.jsp");
             vista.forward(request, response);
-        }else if(accion.equalsIgnoreCase("listaralumnos")){
+        }else if(accion.equalsIgnoreCase("listarnotas")){
             RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoralumnos.jsp");
             vista.forward(request, response);
             
@@ -71,8 +71,12 @@ public class Menuprofserv extends HttpServlet {
             RequestDispatcher vista = request.getRequestDispatcher("Vistaporasignatura.jsp");
             vista.forward(request, response);
             
-        }else if(accion.equalsIgnoreCase("listarnotas")){
+        }else if(accion.equalsIgnoreCase("listaralumnos")){
             RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesornotas.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("gonota")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesorcheck.jsp");
             vista.forward(request, response);
             
         }else{
