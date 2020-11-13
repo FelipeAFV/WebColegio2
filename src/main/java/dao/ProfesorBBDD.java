@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.AlumnoDTO;
 import modelo.AsignaturaDTO;
+import modelo.Conexion;
 import modelo.ProfesorDTO;
 import modelo.ProfesorJoinDTO;
 
@@ -25,6 +26,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             ArrayList<ProfesorDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            //Connection conexion = Conexion.obtenerConexion();
             PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM profesor");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -49,6 +51,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             ArrayList<AsignaturaDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            //Connection conexion = Conexion.obtenerConexion();
             PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura WHERE profesor_id = 1");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -71,6 +74,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             ArrayList<ProfesorJoinDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            //Connection conexion = Conexion.obtenerConexion();
             PreparedStatement stmt = conexion.prepareStatement("SELECT m.alumno_id,m.asignatura_id,al.nombre,al.apellido,m.trimestre,m.nota FROM asignatura a join matricula m on (a.id = m.asignatura_id) join alumno al on(m.alumno_id = al.id) WHERE a.id = ?");
             stmt.setInt(1, idasig);
             ResultSet rs = stmt.executeQuery();
