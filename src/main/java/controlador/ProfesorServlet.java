@@ -198,5 +198,4 @@ public class ProfesorServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

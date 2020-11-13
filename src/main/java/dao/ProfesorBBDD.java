@@ -90,7 +90,7 @@ public class ProfesorBBDD implements ProfesorDAO{
         }
     }
 
-<<<<<<< HEAD
+
        
     //Metodos para el admin
     
@@ -174,7 +174,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             System.out.println("Error al editar "+e);
         }
         return false;
-=======
+        }
     @Override
     public boolean updatearnota(int id,int asignatura_id,double nota) {
         try{
@@ -190,7 +190,7 @@ public class ProfesorBBDD implements ProfesorDAO{
         }catch(ClassNotFoundException | SQLException e){
             return false;
         }
->>>>>>> samuel
+
     }
     
 }
