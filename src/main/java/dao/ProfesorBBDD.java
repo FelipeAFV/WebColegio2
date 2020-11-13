@@ -174,7 +174,11 @@ public class ProfesorBBDD implements ProfesorDAO{
             System.out.println("Error al editar "+e);
         }
         return false;
+<<<<<<< HEAD
     }
+=======
+        }
+>>>>>>> f72c270e275a81d35d87969b8d979a9a3e48f257
     @Override
     public boolean updatearnota(int id,int asignatura_id,double nota) {
         try{
