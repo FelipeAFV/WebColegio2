@@ -15,11 +15,11 @@
         <div>
             <form action="Menuprofserv">
                 id:<br>
-                <input type="text" name="idalum" value="<%=request.getParameter("id")%>"><br>
+                <input type="text" readonly="" name="idalum" value="<%=request.getParameter("id")%>"><br>
                 id_asignatura:<br>
-                <input type="text" name="idasignatura" value="<%=request.getParameter("idasig")%>"><br>
+                <input type="text" readonly="" name="idasignatura" value="<%=request.getParameter("idasig")%>"><br>
                 trimestre:<br>
-                <input type="text" name="trim" value="<%=request.getParameter("trimestre")%>"><br>
+                <input type="text" readonly="" name="trim" value="<%=request.getParameter("trimestre")%>"><br>
                 Nueva nota:<br>
                 <input type="text" name="nuevanota"><br>
                 
