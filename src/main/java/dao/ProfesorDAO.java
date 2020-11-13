@@ -15,4 +15,5 @@ public interface ProfesorDAO {
     public List listar();
     public List listarasignaturas();
     public List listaralumnosasignatura(int idasig);
+    public boolean updatearnota(int id,int asignatura_id,double nota);
 }

@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import dao.ProfesorBBDD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -77,6 +78,17 @@ public class Menuprofserv extends HttpServlet {
             
         }else if(accion.equalsIgnoreCase("gonota")){
             RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesorcheck.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("editarasignatura")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoredit.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("update")){
+            ProfesorBBDD p = new ProfesorBBDD();
+            p.updatearnota(Integer.parseInt(request.getParameter("idalum")),Integer.parseInt(request.getParameter("idasignatura")) , Double.parseDouble(request.getParameter("nuevanota")));
+            
+            RequestDispatcher vista = request.getRequestDispatcher("MenuProfesor.jsp");
             vista.forward(request, response);
             
         }else{

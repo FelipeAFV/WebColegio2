@@ -37,6 +37,7 @@
                     <th>Apellido</th>
                     <th>Trimestre</th>
                     <th>Nota</th>
+                    <th>Editar</th>
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
@@ -52,6 +53,7 @@
                     <td><%= as.getApellido()%></td>
                     <td><%= as.getTrimestre()%></td>
                     <td><%= as.getNota()%></td>
+                    <td><a href="Menuprofserv?accion=editarasignatura&id=<%=as.getId_alumno()%>&idasig=<%=as.getId_asignatura()%>&trimestre=<%=as.getTrimestre()%>">editar</a></td>
                 </tr>
                 <%}%>
             </table>

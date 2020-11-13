@@ -90,5 +90,22 @@ public class ProfesorBBDD implements ProfesorDAO{
             return null;
         }
     }
+
+    @Override
+    public boolean updatearnota(int id,int asignatura_id,double nota) {
+        try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("Update matricula set nota = ? WHERE alumno_id = ? AND asignatura_id = ?");
+            stmt.setDouble(1, nota);
+            stmt.setInt(2, id);
+            stmt.setInt(3, asignatura_id);
+            stmt.executeUpdate();
+            
+            return true;
+        }catch(ClassNotFoundException | SQLException e){
+            return false;
+        }
+    }
     
 }
