@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import modelo.AlumnoDTO;
 import modelo.NotaDTO;
 import modelo.ProfesorDTO;
@@ -19,5 +20,12 @@ public interface AlumnoDAO {
     public ArrayList<ProfesorDTO> listarProfesores(int idAlumno);
     public ArrayList<AlumnoDTO> listarAlumnos(int idAlumno);
     public ArrayList<NotaDTO> listarNotas(int idAlumno);
+    
+    //Para el admin
+    public List listar();
+    public AlumnoDTO list(int id);
+    public boolean add(AlumnoDTO userA);
+    public boolean edit(AlumnoDTO userA);
+    public boolean eliminar(int id);
     
 }
