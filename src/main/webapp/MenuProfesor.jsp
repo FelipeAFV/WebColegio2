@@ -14,7 +14,7 @@
     <body>
         <div>
             <a href="Menuprofserv?accion=listarprofesores">Listar profesores</a><br><br>
-            <a href="Menuprofserv?accion=tabla1">Listar Alumnos</a><br><br>
+            <a href="Menuprofserv?accion=listaralumnos">Listar Alumnos</a><br><br>
             <a href="Menuprofserv?accion=tabla2">Registrar notas</a><br><br>
         </div>
         <div>

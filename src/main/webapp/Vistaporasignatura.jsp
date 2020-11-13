@@ -1,12 +1,12 @@
 <%-- 
-    Document   : Vistaprofesoralumnos
-    Created on : 12-11-2020, 18:07:07
+    Document   : Vistaporasignatura
+    Created on : 12-11-2020, 19:56:11
     Author     : samuel
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="modelo.AsignaturaDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="modelo.AlumnoDTO"%>
 <%@page import="dao.ProfesorBBDD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,21 +32,19 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre_asignatura</th>
-                    <th>Botones</th>
+                    <th>Nombre</th>
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
-                    List<AsignaturaDTO> contenido = p.listarasignaturas();
-                    Iterator<AsignaturaDTO> iterador = contenido.iterator();
-                    AsignaturaDTO as = null;
+                    List<AlumnoDTO> contenido = p.listaralumnosasignatura(1);
+                    Iterator<AlumnoDTO> iterador = contenido.iterator();
+                    AlumnoDTO as = null;
                     while(iterador.hasNext()){
                         as = iterador.next();
                 %>
                 <tr>
                     <td><%= as.getId()%></td>
-                    <td><%= as.getNombre()%></td>
-                    <td><a href="Menuprofserv?accion=goasignatura&id=<%=as.getId()%>">ir asignatura</a></td>
+                    
                 </tr>
                 <%}%>
             </table>
