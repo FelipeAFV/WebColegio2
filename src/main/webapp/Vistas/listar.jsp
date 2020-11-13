@@ -4,10 +4,10 @@
     Author     : jvarg
 --%>
 
+<%@page import="dao.ProfesorBBDD"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="modelo.ProfesorDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
                     </tr>
                 </thead>
                 <% 
-                    ProfesorDAO pDao = new ProfesorDAO();
+                    ProfesorBBDD pDao = new ProfesorBBDD();
                     List<ProfesorDTO>list= pDao.listar();
                     Iterator<ProfesorDTO> i = list.iterator();
                     ProfesorDTO userP = null;

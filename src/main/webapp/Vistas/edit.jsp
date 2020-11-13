@@ -4,8 +4,8 @@
     Author     : jvarg
 --%>
 
-<%@page import="Modelo.ProfesorDTO"%>
-<%@page import="ModeloDAO.ProfesorDAO"%>
+<%@page import="modelo.ProfesorDTO"%>
+<%@page import="dao.ProfesorBBDD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
     <body>
         <div>
             <%
-                ProfesorDAO pDao = new ProfesorDAO();
+                ProfesorBBDD pDao = new ProfesorBBDD();
                 int id = Integer.parseInt((String) request.getAttribute("idprof"));
                 ProfesorDTO prof = (ProfesorDTO)pDao.list(id);
             %>
