@@ -16,6 +16,14 @@
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Menuprofserv</servlet-name>
+        <servlet-class>controlador.Menuprofserv</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Menuprofserv</servlet-name>
+        <url-pattern>/Menuprofserv</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
