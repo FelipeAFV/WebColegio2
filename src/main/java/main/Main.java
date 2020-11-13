@@ -24,17 +24,22 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         Connection con = Conexion.obtenerConexion();
-        String query2 = "SELECT * FROM employees";
-        PreparedStatement ps = con.prepareStatement(query2);
+
+        String query = "SELECT * FROM '?' WHERE login = ? AND clave = ? ";
+
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, "ALUMNO");
+        ps.setString(2, "al");
+        ps.setString(3, "alumno1");
+        ResultSet rs = ps.executeQuery();
+
+        //String query2 = "SELECT * FROM alumno WHERE login = 'al' AND clave = 'alumno1' ";
+       //PreparedStatement ps = con.prepareStatement(query2);
         ArrayList<AlumnoDTO> alumnos = new ArrayList<>();
-        try {
-            ps.setInt(1, 12);
-        } catch (SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ResultSet rs = ps.executeQuery(query2);
+
+        //ResultSet rs = ps.executeQuery(query2);
         rs.next();
-        System.out.println(rs.getString("first_name"));
+        System.out.println(rs.getString("nombre"));
 
     }
 

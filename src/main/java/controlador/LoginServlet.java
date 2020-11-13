@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Sesion;
+import modelo.User;
 
 /**
  *
@@ -31,38 +32,28 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         PrintWriter out = response.getWriter();
-        
+   
         String usuario = request.getParameter("usuario");
-        String contraseña = request.getParameter("contraseña");
+        String contraseña = request.getParameter("contrasena");
         String cargo = request.getParameter("cargo");
-        if(Sesion.validarUsuario(usuario, contraseña, cargo) != null) {
-            if (cargo == "Profesor") {
-                response.sendRedirect("/VistaProfesor");
-            } else if (cargo == "Alumno") {
-                response.sendRedirect("/VistaAlumno");
-            } else if (cargo == "Admin"){
-                response.sendRedirect("/VistaAdmin");
+        User user = Sesion.validarUsuario(usuario, contraseña, cargo);
+        if(user != null) {
+            
+            if ("Profesor".equals(cargo)) {
+                response.sendRedirect("/SistemaColegio/MenuProfesor.jsp");
+            } else if ("Alumno".equals(cargo)) {
+                getServletContext().getRequestDispatcher("/VistaAlumno.jsp").forward(request, response);
+                
+            } else if ("Administrador".equals(cargo)){
+                response.sendRedirect("/SistemaColegio/VistaAdmin.jsp");
             }
         } else {
-            response.sendRedirect("/VistaError");
+            out.print(usuario);
+            out.print(contraseña);
+            out.print(cargo);
         }
-        
-        try {
-           
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Radio button seleccionado " + request.getParameter("cargo")+ "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

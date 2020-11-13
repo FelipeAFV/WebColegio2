@@ -17,11 +17,21 @@ public class ProfesorDTO extends User{
     private String last_name;
     private String email;
     private String specialist;
+    private String asignatura;
     
     public ProfesorDTO(){
         
     }
 
+    public String getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    
     
 
     public String getName() {

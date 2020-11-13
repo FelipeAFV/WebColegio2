@@ -18,7 +18,7 @@
      
             <input id="listarProfesores" type="submit" name="accion"  value="Listar Profesores"></input>
 
-            <input id="listarNotas" type="submit"name="accion"  value="Listar Notas"></input>
+            <input id="listarNotas" type="submit"name="accion"  value="Listar Asignaturas"></input>
         </form>
        
     </body>

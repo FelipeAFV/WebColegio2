@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 public class Conexion {
 
     private static Connection conn;
-    private static String user = "hr";
+    private static String user = "progra_av";
     private static String password = "190298";
     private static String url = "jdbc:oracle:thin:@localhost:1521:BBDDEJ";
 

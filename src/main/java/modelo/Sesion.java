@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class Sesion {
 
-    private static Sesion sesion;
+    private static Sesion sesion = null;
     private User usuario;
 
     private Sesion() {
@@ -34,29 +35,39 @@ public class Sesion {
     }
 
     public static Sesion obtenerSesionActual() {
-        if (sesion != null) {
+        if (sesion == null) {
+            sesion = new Sesion();
             return sesion;
         } else {
-            return new Sesion();
+            return sesion;
         }
     }
 
     public static User validarUsuario(String usuario, String contraseña, String cargo) {
 
-        User us = null;
+        
         Connection con = Conexion.obtenerConexion();
-        String query = "SELECT * FROM ? WHERE login = ? AND contraseña = ? ";
+        String query = "";
+        if (cargo.equals("Alumno")) {
+            query = "SELECT * FROM alumno WHERE login = ? AND clave = ? ";
+        } else if (cargo.equals("Profesor")) {
+            query = "SELECT * FROM profesor WHERE login = ? AND clave = ? ";
+        } else if (cargo.equals("Administrador")) {
+            query = "SELECT * FROM administrador WHERE login = ? AND clave = ? ";
+        }
+       
 
         try {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, cargo);
-            ps.setString(2, usuario);
-            ps.setString(3, contraseña);
+            
+            ps.setString(1, usuario);
+            ps.setString(2, contraseña);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 //Crear el usuario para almacenarlo en la sesion
-                us = new User();
-                us.setId(rs.getInt("id"));
+                User us = new User();
+                int id = rs.getInt("id");
+                us.setId(id);
                 Sesion.obtenerSesionActual().setUsuario(us);
                 return us;
             } else {

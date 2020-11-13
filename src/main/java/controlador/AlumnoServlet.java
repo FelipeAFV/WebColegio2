@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.AlumnoDTO;
+import modelo.AsignaturaDTO;
+import modelo.ProfesorDTO;
 import modelo.Sesion;
 
 /**
@@ -23,8 +25,8 @@ import modelo.Sesion;
  */
 public class AlumnoServlet extends HttpServlet {
 
-    
     private AlumnoDAO alumDAO;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,17 +39,29 @@ public class AlumnoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String accion = request.getParameter("accion");
         alumDAO = new AlumnoBBDD();
         if (accion.equals("Listar Alumnos")) {
-            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(12);
-            request.setAttribute("alumnos", alumnos );
+            //Sesion sesion = Sesion.obtenerSesionActual();
+            //int id = sesion.getUsuario().getId();
+            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(1);
+            request.setAttribute("alumnos", alumnos);
             getServletContext().getRequestDispatcher("/VistaListarAlumnos.jsp").forward(request, response);
-        } else if (accion.equals("Listar Notas")) {
             
+        } else if (accion.equals("Listar Asignaturas")) {
+            Sesion sesion = Sesion.obtenerSesionActual();
+            int id = sesion.getUsuario().getId();
+            ArrayList<AsignaturaDTO> asignaturas = alumDAO.listarAsignaturas(id);
+            request.setAttribute("asignaturas", asignaturas);
+            getServletContext().getRequestDispatcher("/VistaListarAsignatura.jsp").forward(request, response);
+
         } else if (accion.equals("Listar Profesores")) {
-            
+            Sesion sesion = Sesion.obtenerSesionActual();
+            int id = sesion.getUsuario().getId();
+            ArrayList<ProfesorDTO> profesores = alumDAO.listarProfesores(id);
+            request.setAttribute("profesores", profesores);
+            getServletContext().getRequestDispatcher("/VistaListarProfesor.jsp").forward(request, response);
         }
 
     }

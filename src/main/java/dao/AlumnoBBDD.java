@@ -9,10 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.AlumnoDTO;
+import modelo.AsignaturaDTO;
 import modelo.Conexion;
 import modelo.NotaDTO;
 import modelo.ProfesorDTO;
@@ -26,27 +28,51 @@ public class AlumnoBBDD implements AlumnoDAO {
 
     @Override
     public ArrayList<ProfesorDTO> listarProfesores(int idAlumno) {
-        return null;
+        Connection con = Conexion.obtenerConexion();
+        try {
+            String query = "SELECT p.nombre , apellido, a.nombre asignatura"
+                    + " FROM profesor p JOIN asignatura a ON p.id = a.profesor_id";
+
+            Statement ps = con.createStatement();
+            ArrayList<ProfesorDTO> profesores = new ArrayList<>();
+            ResultSet rs = ps.executeQuery(query);
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String asignatura = rs.getString("asignatura");
+                ProfesorDTO profe = new ProfesorDTO();
+                profe.setName(nombre);
+                profe.setLast_name(apellido);
+                profe.setAsignatura(asignatura);
+                profesores.add(profe);
+
+            }
+            return profesores;
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     @Override
     public ArrayList<AlumnoDTO> listarAlumnos(int idAlumno) {
-        //Sesion sesion = Sesion.obtenerSesionActual();
-        //int id = sesion.getUsuario().getId();
+
         Connection con = Conexion.obtenerConexion();
         try {
-            /*String query = "SELECT nombre, apellido FROM alumno a1 JOIN matricula m1 ON "
-                    + " m.alumno_id = a1.id = m1.alumno_id "
-                    + "WHERE asignatura_id IN(SELECT asignatura_id FROM alumno a"
-                    + "JOIN  matricula m ON a.id = m.alumno_id WHERE alumno_id = ?)";*/
-            String query2 = "SELECT * FROM employees";
-            PreparedStatement ps = con.prepareStatement(query2);
+            String query = "SELECT * FROM alumno";
+
+            Statement ps = con.createStatement();
             ArrayList<AlumnoDTO> alumnos = new ArrayList<>();
-            //ps.setInt(1, idAlumno);
-            ResultSet rs = ps.executeQuery(query2);
+            ResultSet rs = ps.executeQuery(query);
             while (rs.next()) {
-                String nombre = rs.getString("first_name");
-                String apellido = rs.getString("last_name");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 AlumnoDTO al = new AlumnoDTO();
                 al.setNombre(nombre);
                 al.setApellido(apellido);
@@ -67,8 +93,68 @@ public class AlumnoBBDD implements AlumnoDAO {
     }
 
     @Override
-    public ArrayList<NotaDTO> listarNotas(int idAlumno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<AsignaturaDTO> listarAsignaturas(int idAlumno) {
+        
+        Connection con = Conexion.obtenerConexion();
+        try {
+            String query = "SELECT DISTINCT nombre, asignatura_id FROM asignatura a JOIN matricula m ON m.asignatura_id = a.id WHERE alumno_id = 20";
+
+            //PreparedStatement ps = con.prepareStatement(query);
+            //ps.setInt(1, idAlumno);
+            ArrayList<AsignaturaDTO> asignatura = new ArrayList<>();
+            
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery(query);
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                int idAsig = rs.getInt("asignatura_id");
+                AsignaturaDTO asig = new AsignaturaDTO();
+                asig.setNombre(nombre);
+                asig.setId(idAsig);
+                asignatura.add(asig);
+
+            }
+            return asignatura;
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> listarNotasAsignatura(int idAsign, int idAlum) {
+        Connection con = Conexion.obtenerConexion();
+        try {
+            
+            String query = "SELECT nota FROM matricula WHERE alumno_id = ?"
+                    + " AND asignatura_id= ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, idAlum);
+            ps.setInt(2, idAsign);
+            ResultSet rs = ps.executeQuery();
+            
+            ArrayList<Integer> notas = new ArrayList<>();
+            while (rs.next()) {
+                int nota = rs.getInt("nota");
+                notas.add(nota);
+                
+            }
+            return notas;
+            
+        } catch (Exception ex) {
+            return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }
