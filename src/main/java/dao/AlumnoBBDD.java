@@ -103,7 +103,7 @@ public class AlumnoBBDD implements AlumnoDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("select * from profesor where id="+id);
+            PreparedStatement stmt = conexion.prepareStatement("select * from alumno where id="+id);
             ResultSet rs = stmt.executeQuery();
              while(rs.next()) {
                 AlumnoDTO al = new AlumnoDTO();
