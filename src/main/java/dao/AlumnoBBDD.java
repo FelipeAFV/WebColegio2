@@ -86,6 +86,7 @@ public class AlumnoBBDD implements AlumnoDAO {
                 al.setId(rs.getInt("id"));
                 al.setUsername(rs.getString("usuario"));
                 al.setPassword(rs.getString("password"));
+                al.setIdNivel(rs.getInt("Idnivel"));
                 al.setNombre(rs.getString("nombre"));
                 al.setApellido(rs.getString("apellido"));
                 lista.add(al);
@@ -109,6 +110,7 @@ public class AlumnoBBDD implements AlumnoDAO {
                 al.setId(rs.getInt("id"));
                 al.setUsername(rs.getString("usuario"));
                 al.setPassword(rs.getString("password"));
+                al.setIdNivel(rs.getInt("Idnivel"));
                 al.setNombre(rs.getString("nombre"));
                 al.setApellido(rs.getString("apellido"));
                 
@@ -128,6 +130,7 @@ public class AlumnoBBDD implements AlumnoDAO {
             PreparedStatement stmt = conexion.prepareStatement("Insert into alumno(usuario, password, nombre, apellido) values('"
                 +userA.getUsername()+"','"
                 +userA.getPassword()+"','"
+                +userA.getIdNivel()+"','"
                 +userA.getNombre()+"','"
                 +userA.getApellido()
                 +"')");
@@ -144,6 +147,7 @@ public class AlumnoBBDD implements AlumnoDAO {
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
             PreparedStatement stmt = conexion.prepareStatement("update alumno set usuario='"+userA.getUsername()
                 +"',password='"+userA.getPassword()
+                +"',Idnivel='"+userA.getIdNivel()
                 +"',nombre='"+userA.getNombre()
                 +"',apellido='"+userA.getApellido()
                 +"'where id='"+userA.getId()+"'");
