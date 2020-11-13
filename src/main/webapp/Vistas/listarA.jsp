@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.AlumnoDTO"%>
+<%@page import="modelo.AlumnoDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.AlumnoBBDD"%>
+<%@page import="dao.AlumnoBBDD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,6 +25,7 @@
                         <th>ID</th>
                         <th>Usuario</th>
                         <th>Contraseña</th>
+                        <th>Nivel</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Botones</th>
@@ -45,8 +46,9 @@
                         <td><%=userA.getId()%></td>
                         <td><%=userA.getUsername()%></td>
                         <td><%=userA.getPassword()%></td>
-                        <td><%=userA.getName()%></td>
-                        <td><%=userA.getLast_name()%></td>
+                        <td><%=userA.getIdNivel()%></td>
+                        <td><%=userA.getNombre()%></td>
+                        <td><%=userA.getApellido()%></td>
                         <td>
                             <a href="ProfesorServlet?accion=modify&id=<%= userA.getId()%>">Modificar</a>
                             <a href="ProfesorServlet?accion=delete&id=<%= userA.getId()%>">Eliminar</a>

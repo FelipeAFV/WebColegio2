@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.ProfesorDTO"%>
+<%@page import="modelo.ProfesorDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ProfesorDAO"%>
+<%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

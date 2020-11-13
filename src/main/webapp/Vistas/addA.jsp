@@ -19,6 +19,8 @@
                     <input type="text" name="txtUsername"><br>
                     Contraseña: <br>
                     <input type="password" name="txtPassword"><br>
+                    Nivel <br>
+                    <input type="text" name="txtNivel"><br>
                     Nombre:  <br>
                     <input type="text" name="txtName"><br>
                     Apellido: <br>

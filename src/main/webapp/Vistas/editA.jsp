@@ -4,8 +4,9 @@
     Author     : jvarg
 --%>
 
-<%@page import="Modelo.AlumnoDTO"%>
-<%@page import="ModeloDAO.AlumnoDAO"%>
+<%@page import="dao.AlumnoBBDD"%>
+<%@page import="modelo.AlumnoDTO"%>
+<%@page import="dao.AlumnoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
     <body>
         <div>
             <%
-                AlumnoDAO aDao = new AlumnoDAO();
+                AlumnoBBDD aDao = new AlumnoBBDD();
                 int id = Integer.parseInt((String) request.getAttribute("idal"));
                 AlumnoDTO al = (AlumnoDTO)aDao.list(id);
             %>
@@ -27,10 +28,12 @@
                     <input type="text" name="txtUsername" value="<%=al.getUsername()%>"><br>
                     Contraseña: <br>
                     <input type="password" name="txtPassword" value="<%=al.getPassword()%>"><br>
+                    Nivel <br>
+                    <input type="text" name="txtNivel" value="<%=al.getIdNivel()%>"><br>
                     Nombre:  <br>
-                    <input type="text" name="txtName" value="<%=al.getName()%>"><br>
+                    <input type="text" name="txtName" value="<%=al.getNombre()%>"><br>
                     Apellido: <br>
-                    <input type="text" name="txtLast_name" value="<%=al.getLast_name()%>"><br>
+                    <input type="text" name="txtLast_name" value="<%=al.getApellido()%>"><br>
                     <input type="hidden" name="txtida" value="<%=al.getId()%>">
                     <input type="submit" name="accion" value="Refresh"><br>
                     <a href="ProfesorServlet?accion=listarA">Volver</a>
