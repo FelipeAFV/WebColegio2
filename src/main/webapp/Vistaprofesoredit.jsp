@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <h1>Editar Nota</h1>
     <body>
         <div>
             <form action="Menuprofserv">
