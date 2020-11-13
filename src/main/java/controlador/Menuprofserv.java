@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import dao.ProfesorBBDD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -63,12 +64,31 @@ public class Menuprofserv extends HttpServlet {
         if(accion.equalsIgnoreCase("listarprofesores")){
             RequestDispatcher vista = request.getRequestDispatcher("VistaProfesor.jsp");
             vista.forward(request, response);
-        }else if(accion.equalsIgnoreCase("listaralumnos")){
+        }else if(accion.equalsIgnoreCase("listarnotas")){
             RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoralumnos.jsp");
             vista.forward(request, response);
             
         }else if(accion.equalsIgnoreCase("goasignatura")){
             RequestDispatcher vista = request.getRequestDispatcher("Vistaporasignatura.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("listaralumnos")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesornotas.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("gonota")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesorcheck.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("editarasignatura")){
+            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoredit.jsp");
+            vista.forward(request, response);
+            
+        }else if(accion.equalsIgnoreCase("update")){
+            ProfesorBBDD p = new ProfesorBBDD();
+            p.updatearnota(Integer.parseInt(request.getParameter("idalum")),Integer.parseInt(request.getParameter("idasignatura")) , Double.parseDouble(request.getParameter("nuevanota")));
+            
+            RequestDispatcher vista = request.getRequestDispatcher("MenuProfesor.jsp");
             vista.forward(request, response);
             
         }else{

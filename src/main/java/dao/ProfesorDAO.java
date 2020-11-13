@@ -16,10 +16,14 @@ public interface ProfesorDAO {
     public List listar();
     public List listarasignaturas();
     public List listaralumnosasignatura(int idasig);
+<<<<<<< HEAD
     
     //Para el admin
     public ProfesorDTO list(int id);
     public boolean add(ProfesorDTO userP);
     public boolean edit(ProfesorDTO userP);
     public boolean eliminar(int id);
+=======
+    public boolean updatearnota(int id,int asignatura_id,double nota);
+>>>>>>> samuel
 }
