@@ -6,10 +6,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.AlumnoDTO;
@@ -69,6 +71,101 @@ public class AlumnoBBDD implements AlumnoDAO {
     @Override
     public ArrayList<NotaDTO> listarNotas(int idAlumno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List listar() {
+        try {
+            ArrayList<AlumnoDTO> lista = new ArrayList<>();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM", "progra", "Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("select * from alumno");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                AlumnoDTO al = new AlumnoDTO();
+                al.setId(rs.getInt("id"));
+                al.setUsername(rs.getString("usuario"));
+                al.setPassword(rs.getString("password"));
+                al.setNombre(rs.getString("nombre"));
+                al.setApellido(rs.getString("apellido"));
+                lista.add(al);
+            }
+            return lista;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error " + e);
+        }
+        return null;
+    }
+
+    @Override
+    public AlumnoDTO list(int id) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("select * from profesor where id="+id);
+            ResultSet rs = stmt.executeQuery();
+             while(rs.next()) {
+                AlumnoDTO al = new AlumnoDTO();
+                al.setId(rs.getInt("id"));
+                al.setUsername(rs.getString("usuario"));
+                al.setPassword(rs.getString("password"));
+                al.setNombre(rs.getString("nombre"));
+                al.setApellido(rs.getString("apellido"));
+                
+            }
+            
+        }catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error " + e);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean add(AlumnoDTO userA) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("Insert into alumno(usuario, password, nombre, apellido) values('"
+                +userA.getUsername()+"','"
+                +userA.getPassword()+"','"
+                +userA.getNombre()+"','"
+                +userA.getApellido()
+                +"')");
+            stmt.executeUpdate();
+        } catch(ClassNotFoundException | SQLException e) {
+        }
+        return false;
+    }
+
+    @Override
+    public boolean edit(AlumnoDTO userA) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("update alumno set usuario='"+userA.getUsername()
+                +"',password='"+userA.getPassword()
+                +"',nombre='"+userA.getNombre()
+                +"',apellido='"+userA.getApellido()
+                +"'where id='"+userA.getId()+"'");
+            stmt.executeUpdate();
+                    
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar "+e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("delete from alumno where id='"+id+"'");
+            stmt.executeUpdate();
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar "+e);
+        }
+        return false;
     }
 
 }
