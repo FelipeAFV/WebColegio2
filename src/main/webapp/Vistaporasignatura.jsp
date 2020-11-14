@@ -28,6 +28,7 @@
     </style>
     </head>
     <body>
+        <h1>Detalle Alumnos</h1>
         <div>
             
             <table>

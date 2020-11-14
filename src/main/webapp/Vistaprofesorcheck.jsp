@@ -28,6 +28,7 @@
     </style>
     </head>
     <body>
+        <h1>Alumnos Inscritos</h1>
         <div>
             
             <table>

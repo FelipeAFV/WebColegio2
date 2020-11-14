@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Menu Profesor</title>
     </head>
     <body>
+        <h1>Menu Profesor</h1>
         <div>
             <a href="Menuprofserv?accion=listarprofesores">Listar profesores</a><br><br>
             <a href="Menuprofserv?accion=listaralumnos">Listar Alumnos</a><br><br>

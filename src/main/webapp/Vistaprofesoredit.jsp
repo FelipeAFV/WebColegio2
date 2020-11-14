@@ -10,20 +10,42 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            label{
+                display: inline-block;
+                width: 100px;
+            }
+            div {
+                margin: 15px;
+            }
+            
+        </style>
     </head>
+    <h1>Editar Nota</h1>
     <body>
         <div>
             <form action="Menuprofserv">
-                id:<br>
-                <input type="text" readonly="" name="idalum" value="<%=request.getParameter("id")%>"><br>
-                id_asignatura:<br>
-                <input type="text" readonly="" name="idasignatura" value="<%=request.getParameter("idasig")%>"><br>
-                trimestre:<br>
-                <input type="text" readonly="" name="trim" value="<%=request.getParameter("trimestre")%>"><br>
-                Nueva nota:<br>
-                <input type="text" name="nuevanota"><br>
+                <div>
+                  <label>Id:</label>
+                  <input type="text" readonly="" name="idalum" value="<%=request.getParameter("id")%>"><br>  
+                </div>
+                <div>
+                    <label>Id Asignatura:</label>
+                    <input type="text" readonly="" name="idasignatura" value="<%=request.getParameter("idasig")%>"><br>
+                </div>
+                <div>
+                    <label>Trimestre:</label>
+                    <input type="text" readonly="" name="trim" value="<%=request.getParameter("trimestre")%>"><br>
+                </div>
+                <div>
+                   <label>Nueva nota:</label>
+                    <input type="text" name="nuevanota"><br> 
+                </div>
                 
-                <input type="submit" name="accion" value="update">
+                <div>
+                    <input type="submit" name="accion" value="update">
+                </div>
+                
             </form>
         </div>
     </body>
