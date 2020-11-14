@@ -1,7 +1,9 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import modelo.AsignaturaDTO;
+import modelo.MatriculaDTO;
 
 /**
  *
@@ -15,4 +17,5 @@ public interface AdminDAO {
     public boolean edit(AsignaturaDTO asig);
     public boolean eliminar(int id);
     
+    public ArrayList<MatriculaDTO> addMatricula();
 }

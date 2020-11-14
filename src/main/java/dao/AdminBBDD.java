@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.AlumnoDTO;
 import modelo.AsignaturaDTO;
+import modelo.MatriculaDTO;
 
 /**
  *
@@ -110,6 +112,36 @@ public class AdminBBDD implements AdminDAO {
             System.out.println("Error al borrar "+e);
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<MatriculaDTO> addMatricula() {
+        
+        ArrayList<MatriculaDTO> list = new ArrayList<MatriculaDTO>();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:orcl","user","256980");
+            String consulta = "select a.id,asig.id,m.trimestre, m.nota from matricula m inner join alumno a on (m.alumno_id = a.id) inner join asignatura asig on (m.asignatura_id = asig.id))";
+            PreparedStatement stmt = conexion.prepareStatement(consulta);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                AlumnoDTO a = new AlumnoDTO();
+                AsignaturaDTO asig = new AsignaturaDTO();
+                MatriculaDTO m = new MatriculaDTO();
+                a.setId(rs.getInt("a.id"));
+                asig.setId(rs.getInt("asig.id"));
+                m.setTrimestre(rs.getInt("m.trimestre"));
+                m.setNota(rs.getInt("m.nota"));
+                m.setAlumno(a);
+                m.setAsignatura(asig);
+                list.add(m);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error al agregar matricula "+e);
+        
+        } 
+        return list;
+        
     }
 
 }
