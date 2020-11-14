@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.AlumnoDTO;
 import modelo.AsignaturaDTO;
+import modelo.Conexion;
 import modelo.ProfesorDTO;
+import modelo.ProfesorJoinDTO;
 
 /**
  *
@@ -24,6 +26,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             ArrayList<ProfesorDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            //Connection conexion = Conexion.obtenerConexion();
             PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM profesor");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -48,6 +51,7 @@ public class ProfesorBBDD implements ProfesorDAO{
             ArrayList<AsignaturaDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            //Connection conexion = Conexion.obtenerConexion();
             PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura WHERE profesor_id = 1");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -67,22 +71,29 @@ public class ProfesorBBDD implements ProfesorDAO{
     public List listaralumnosasignatura(int idasig) {
         
         try{
-            ArrayList<AlumnoDTO> lista = new ArrayList<>();
+            ArrayList<ProfesorJoinDTO> lista = new ArrayList<>();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura WHERE id = ?");
+            //Connection conexion = Conexion.obtenerConexion();
+            PreparedStatement stmt = conexion.prepareStatement("SELECT m.alumno_id,m.asignatura_id,al.nombre,al.apellido,m.trimestre,m.nota FROM asignatura a join matricula m on (a.id = m.asignatura_id) join alumno al on(m.alumno_id = al.id) WHERE a.id = ?");
             stmt.setInt(1, idasig);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                AlumnoDTO alum = new AlumnoDTO();
-                alum.setId(rs.getInt("id"));
-                lista.add(alum);
+                ProfesorJoinDTO profj = new ProfesorJoinDTO();
+                profj.setId_alumno(rs.getInt("alumno_id"));
+                profj.setId_asignatura(rs.getInt("asignatura_id"));
+                profj.setNombre(rs.getString("nombre"));
+                profj.setApellido(rs.getString("apellido"));
+                profj.setTrimestre(rs.getInt("trimestre"));
+                profj.setNota(rs.getDouble("nota"));
+                lista.add(profj);
             }
             return lista;
         }catch(ClassNotFoundException | SQLException e){
             return null;
         }
     }
+
 
        
     //Metodos para el admin
@@ -167,6 +178,27 @@ public class ProfesorBBDD implements ProfesorDAO{
             System.out.println("Error al editar "+e);
         }
         return false;
+
+    }
+
+        
+
+    @Override
+    public boolean updatearnota(int id,int asignatura_id,double nota) {
+        try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
+            PreparedStatement stmt = conexion.prepareStatement("Update matricula set nota = ? WHERE alumno_id = ? AND asignatura_id = ?");
+            stmt.setDouble(1, nota);
+            stmt.setInt(2, id);
+            stmt.setInt(3, asignatura_id);
+            stmt.executeUpdate();
+            
+            return true;
+        }catch(ClassNotFoundException | SQLException e){
+            return false;
+        }
+
     }
     
 }

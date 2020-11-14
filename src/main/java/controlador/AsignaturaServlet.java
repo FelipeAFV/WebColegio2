@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import dao.AdminBBDD;
 import dao.ProfesorBBDD;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,14 +14,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Sesion;
+import modelo.AsignaturaDTO;
 
 /**
  *
- * @author samuel
+ * @author jvarg
  */
-public class Menuprofserv extends HttpServlet {
-
+public class AsignaturaServlet extends HttpServlet {
+    String listar="Vistas/listarAsig.jsp";
+    String add="Vistas/addAsig.jsp";
+    String editar="Vistas/editAsig.jsp";
+    AsignaturaDTO asig = new AsignaturaDTO();
+    AdminBBDD asigDao = new AdminBBDD();
+    
+   
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,15 +40,15 @@ public class Menuprofserv extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Menuprofserv</title>");            
+            out.println("<title>Servlet AsignaturaServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Menuprofserv at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AsignaturaServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,42 +66,52 @@ public class Menuprofserv extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String acceso="";
+        String action=request.getParameter("action");
         
-        String accion = request.getParameter("accion");
-        if(accion.equalsIgnoreCase("listarprofesores")){
-            RequestDispatcher vista = request.getRequestDispatcher("VistaProfesor.jsp");
-            vista.forward(request, response);
-        }else if(accion.equalsIgnoreCase("listarnotas")){
-            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoralumnos.jsp");
-            vista.forward(request, response);
+        
+        if(action.equalsIgnoreCase("listarAsig")) {
+            acceso=listar;
+        } else if(action.equalsIgnoreCase("addAsig")) {
+            acceso=add;
             
-        }else if(accion.equalsIgnoreCase("goasignatura")){
-            RequestDispatcher vista = request.getRequestDispatcher("Vistaporasignatura.jsp");
-            vista.forward(request, response);
+        } else if (action.equalsIgnoreCase("Agregar")) {
+            String nivel_id = request.getParameter("txtNivelId");
+            String profesor_id = request.getParameter("txtProfesorId");
+            String nombre = request.getParameter("txtName");
+            asig.setNivel_id(Integer.parseInt(nivel_id));
+            asig.setProfesor_id(Integer.parseInt(profesor_id));
+            asig.setNombre(nombre);
+            asigDao.add(asig);
+            acceso = listar;
             
-        }else if(accion.equalsIgnoreCase("listaralumnos")){
-            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesornotas.jsp");
-            vista.forward(request, response);
+        } else if(action.equalsIgnoreCase("modificar")) {
+            request.setAttribute("idasig", request.getParameter("id"));
+            acceso=editar;
             
-        }else if(accion.equalsIgnoreCase("gonota")){
-            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesorcheck.jsp");
-            vista.forward(request, response);
+        } else if(action.equalsIgnoreCase("Actualizar")) {
+            int id=Integer.parseInt(request.getParameter("txtidasig"));
+            //Capturar valores de los campos
+            int nivel_id = Integer.parseInt(request.getParameter("txtNivelId"));
+            int profesor_id = Integer.parseInt(request.getParameter("txtProfesorId"));
+            String nombre = request.getParameter("txtName");
+            asig.setId(id);
+            asig.setNivel_id(nivel_id);
+            asig.setProfesor_id(profesor_id);
+            asig.setNombre(nombre);
+            asigDao.edit(asig);
+            acceso=listar;
+        } else if (action.equalsIgnoreCase("eliminar")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            asig.setId(id);
+            asigDao.eliminar(id);
+            acceso=listar;
+        } else if (action.equalsIgnoreCase("Matricula")) {
+            acceso=listar;
             
-        }else if(accion.equalsIgnoreCase("editarasignatura")){
-            RequestDispatcher vista = request.getRequestDispatcher("Vistaprofesoredit.jsp");
-            vista.forward(request, response);
-            
-        }else if(accion.equalsIgnoreCase("update")){
-            ProfesorBBDD p = new ProfesorBBDD();
-            p.updatearnota(Integer.parseInt(request.getParameter("idalum")),Integer.parseInt(request.getParameter("idasignatura")) , Double.parseDouble(request.getParameter("nuevanota")));
-            
-            RequestDispatcher vista = request.getRequestDispatcher("MenuProfesor.jsp");
-            vista.forward(request, response);
-            
-        }else{
-            processRequest(request, response);
         }
-        
+        RequestDispatcher Vista = request.getRequestDispatcher(acceso);
+        Vista.forward(request, response);
     }
 
     /**

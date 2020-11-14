@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Vistaporasignatura
-    Created on : 12-11-2020, 19:56:11
+    Document   : Vistaprofesorcheck
+    Created on : 13-11-2020, 11:15:06
     Author     : samuel
 --%>
 
@@ -28,7 +28,7 @@
     </style>
     </head>
     <body>
-        <h1>Detalle Alumnos</h1>
+        <h1>Alumnos Inscritos</h1>
         <div>
             
             <table>
@@ -36,9 +36,6 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Trimestre</th>
-                    <th>Nota</th>
-                    <th>Editar</th>
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
@@ -52,9 +49,6 @@
                     <td><%= as.getId_alumno()%></td>
                     <td><%= as.getNombre()%></td>
                     <td><%= as.getApellido()%></td>
-                    <td><%= as.getTrimestre()%></td>
-                    <td><%= as.getNota()%></td>
-                    <td><a href="Menuprofserv?accion=editarasignatura&id=<%=as.getId_alumno()%>&idasig=<%=as.getId_asignatura()%>&trimestre=<%=as.getTrimestre()%>">editar</a></td>
                 </tr>
                 <%}%>
             </table>

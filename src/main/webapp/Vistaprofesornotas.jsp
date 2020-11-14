@@ -1,13 +1,12 @@
 <%-- 
-    Document   : Vistaporasignatura
-    Created on : 12-11-2020, 19:56:11
+    Document   : Vistaprofesornotas
+    Created on : 13-11-2020, 00:17:07
     Author     : samuel
 --%>
 
-<%@page import="modelo.ProfesorJoinDTO"%>
 <%@page import="java.util.Iterator"%>
+<%@page import="modelo.AsignaturaDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="modelo.AlumnoDTO"%>
 <%@page import="dao.ProfesorBBDD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,33 +27,27 @@
     </style>
     </head>
     <body>
-        <h1>Detalle Alumnos</h1>
+        <h1>Asignaturas Impartidas</h1>
         <div>
             
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Trimestre</th>
-                    <th>Nota</th>
-                    <th>Editar</th>
+                    <th>Nombre_asignatura</th>
+                    <th>Botones</th>
                 </tr>
                 <%
                     ProfesorBBDD p = new ProfesorBBDD();
-                    List<ProfesorJoinDTO> contenido = p.listaralumnosasignatura(Integer.parseInt(request.getParameter("id")));
-                    Iterator<ProfesorJoinDTO> iterador = contenido.iterator();
-                    ProfesorJoinDTO as = null;
+                    List<AsignaturaDTO> contenido = p.listarasignaturas();
+                    Iterator<AsignaturaDTO> iterador = contenido.iterator();
+                    AsignaturaDTO as = null;
                     while(iterador.hasNext()){
-                    as = iterador.next();
+                        as = iterador.next();
                 %>
                 <tr>
-                    <td><%= as.getId_alumno()%></td>
+                    <td><%= as.getId()%></td>
                     <td><%= as.getNombre()%></td>
-                    <td><%= as.getApellido()%></td>
-                    <td><%= as.getTrimestre()%></td>
-                    <td><%= as.getNota()%></td>
-                    <td><a href="Menuprofserv?accion=editarasignatura&id=<%=as.getId_alumno()%>&idasig=<%=as.getId_asignatura()%>&trimestre=<%=as.getTrimestre()%>">editar</a></td>
+                    <td><a href="Menuprofserv?accion=gonota&id=<%=as.getId()%>">ir asignatura</a></td>
                 </tr>
                 <%}%>
             </table>
