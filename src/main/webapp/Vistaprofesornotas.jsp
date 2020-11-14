@@ -27,6 +27,7 @@
     </style>
     </head>
     <body>
+        <h1>Asignaturas Impartidas</h1>
         <div>
             
             <table>
