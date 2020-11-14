@@ -31,7 +31,7 @@
                     <input type="text" name="txtName" value="<%=asig.getNombre()%>"><br>
                     <input type="hidden" name="txtidasig" value="<%=asig.getId()%>">
                     <input type="submit" name="accion" value="Actualizar"><br>
-                    <a href="AsignaturaServlet?accion=listAsig">Volver</a>
+                    <a href="AsignaturaServlet?action=listAsig">Volver</a>
                 </form>          
         </div>
     </body>

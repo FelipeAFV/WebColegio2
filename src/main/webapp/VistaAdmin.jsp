@@ -10,17 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Página Administrador</title>
-        <style>
-      table,
-      td,
-      th {
-        padding: 10px;
-        border: 2px solid #1c87c9;
-        border-radius: 5px;
-        background-color: #e5e5e5;
-        text-align: center;
-      }
-    </style>
+        <link rel="stylesheet" href="Recursos/css/bootstrap.css" />
     </head>
     <body>
         <div>

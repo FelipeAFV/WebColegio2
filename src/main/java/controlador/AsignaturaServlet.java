@@ -106,6 +106,9 @@ public class AsignaturaServlet extends HttpServlet {
             asig.setId(id);
             asigDao.eliminar(id);
             acceso=listar;
+        } else if (action.equalsIgnoreCase("Matricula")) {
+            acceso=listar;
+            
         }
         RequestDispatcher Vista = request.getRequestDispatcher(acceso);
         Vista.forward(request, response);

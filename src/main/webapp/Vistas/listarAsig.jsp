@@ -19,7 +19,7 @@
     <body>
         <div>
             <h1>Asignaturas</h1>
-            <a href="AsignaturaServlet?accion=addAsig">Agregar nueva asignatura</a>
+            <a href="AsignaturaServlet?action=addAsig">Agregar nueva asignatura</a>
             <table border="1">
                 <thead>
                     <tr>
@@ -48,8 +48,8 @@
                         <td><%=asig.getNombre()%></td>
                     
                         <td>
-                            <a href="AsignaturaServlet?accion=modificar&id=<%= asig.getId()%>">Modificar</a>
-                            <a href="AsignaturaServlet?accion=eliminar&id=<%= asig.getId()%>">Eliminar</a>
+                            <a href="AsignaturaServlet?action=modificar&id=<%= asig.getId()%>">Modificar</a>
+                            <a href="AsignaturaServlet?action=eliminar&id=<%= asig.getId()%>">Eliminar</a>
                             
                         </td>
                     </tr>
