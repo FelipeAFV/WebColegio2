@@ -17,9 +17,9 @@
     </head>
     <body>
         <h1>Asignaturas</h1>
-        <table id="tb1">
+        <table border=1px id="tb1">
             <tr>
-                <th>Nombre Asignatura</th>
+                <th >Nombre asignatura</th>
                 <th>Notas</th>
             </tr>
             <%
@@ -33,8 +33,8 @@
                         
                         asignatura = (AsignaturaDTO) itr.next();
             %>  
-            <tr>
-                <td><%=asignatura.getNombre()%></td>
+            <tr >
+                <td align="center"><%=asignatura.getNombre()%></td>
                 <td><a href="VistaListarNotas.jsp?idAsig=<%=asignatura.getId()%>">Ver Notas</a></td>
                 
 

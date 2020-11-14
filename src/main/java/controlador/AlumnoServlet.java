@@ -43,9 +43,9 @@ public class AlumnoServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         alumDAO = new AlumnoBBDD();
         if (accion.equals("Listar Alumnos")) {
-            //Sesion sesion = Sesion.obtenerSesionActual();
-            //int id = sesion.getUsuario().getId();
-            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(1);
+            Sesion sesion = Sesion.obtenerSesionActual();
+            int id = sesion.getUsuario().getId();
+            ArrayList<AlumnoDTO> alumnos = alumDAO.listarAlumnos(id);
             request.setAttribute("alumnos", alumnos);
             getServletContext().getRequestDispatcher("/VistaListarAlumnos.jsp").forward(request, response);
             

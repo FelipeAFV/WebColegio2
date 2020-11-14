@@ -15,8 +15,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Profesores</h1>
-        <table>
+        <h1>Mis profesores</h1>
+        <table border=1px >
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>

@@ -48,12 +48,14 @@ public class Sesion {
         
         Connection con = Conexion.obtenerConexion();
         String query = "";
-        if (cargo.equals("Alumno")) {
+        if ("Alumno".equals(cargo)) {
             query = "SELECT * FROM alumno WHERE login = ? AND clave = ? ";
-        } else if (cargo.equals("Profesor")) {
+        } else if ("Profesor".equals(cargo)) {
             query = "SELECT * FROM profesor WHERE login = ? AND clave = ? ";
-        } else if (cargo.equals("Administrador")) {
+        } else if ("Administrador".equals(cargo)) {
             query = "SELECT * FROM administrador WHERE login = ? AND clave = ? ";
+        } else {
+            return null;
         }
        
 

@@ -35,8 +35,11 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
    
         String usuario = request.getParameter("usuario");
+        usuario = usuario.trim();
         String contraseña = request.getParameter("contrasena");
+        contraseña = contraseña.trim();
         String cargo = request.getParameter("cargo");
+        
         User user = Sesion.validarUsuario(usuario, contraseña, cargo);
         if(user != null) {
             
@@ -49,9 +52,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("/SistemaColegio/VistaAdmin.jsp");
             }
         } else {
-            out.print(usuario);
-            out.print(contraseña);
-            out.print(cargo);
+            response.sendRedirect("/SistemaColegio/VistaError.jsp");
         }
        
     }
