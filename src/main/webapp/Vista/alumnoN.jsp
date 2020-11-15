@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="/Componente/adminNav.jsp" />
-    <form method="post" action="admin?action=guardarA">
+    <form action="admin">
             <div class ="row">
         <div class="col-md-12"><h2>Nuevo Alumno</h2></div>
     </div>
@@ -64,7 +64,7 @@
         <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <input type="submit" name="btnSaveA" value="GUARDAR" class="btn btn-block btn-dark">
+            <input type="submit" name="action" value="Guardar Alumno" class="btn btn-block btn-dark">
         </div>
         
         <div class="col-md-3"></div>

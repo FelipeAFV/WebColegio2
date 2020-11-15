@@ -36,7 +36,7 @@
             <td><%=as.getProfesor_id()%></td>
             <th>
                 <a href="admin?action=modificarAsig&idAsig=<%= as.getId()%>&nombreAs=<%= as.getNombre()%>&idproff=<%= as.getProfesor_id()%>">Modificar</a>
-                <a href="admin?action=eliminarAsig&id=<%= as.getId()%>">Eliminar</a>
+                <a href="admin?action=eliminarAsig&idasig=<%= as.getId()%>">Eliminar</a>
             </th>
         </tr>
         <%  }%>

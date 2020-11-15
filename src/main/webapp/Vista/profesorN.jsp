@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="/Componente/adminNav.jsp" />
-    <form method="post" action="admin?action=guardarP">
+    <form action="admin">
             <div class ="row">
         <div class="col-md-12"><h2>Nuevo Profesor</h2></div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-3">Profesor ID</div>
         <div class="col-md-3">
-            <input type="text" name="txtProfesor" class="form-control" />
+            <input type="text" name="txtProfesorID" class="form-control" />
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -72,7 +72,7 @@
         <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <input type="submit" name="btnSaveP" value="GUARDAR" class="btn btn-block btn-dark">
+            <input type="submit" name="action" value="Guardar Profesor" class="btn btn-block btn-dark">
         </div>
         
         <div class="col-md-3"></div>

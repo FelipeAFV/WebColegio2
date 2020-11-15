@@ -20,7 +20,7 @@ public class AsignaturaBBDD implements AsignaturaDAO {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
             //Connection conexion = Conexion.obtenerConexion();
-            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM matricula");
+            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM asignatura");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 AsignaturaDTO as = new AsignaturaDTO();
@@ -62,7 +62,7 @@ public class AsignaturaBBDD implements AsignaturaDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
-            PreparedStatement stmt = conexion.prepareStatement("Insert into asignatura(id, nombre, profesor_id) values(?,?,?,?)");
+            PreparedStatement stmt = conexion.prepareStatement("Insert into asignatura(id, nombre, profesor_id) values(?,?,?)");
             stmt.setInt(1, ma.getId());
             stmt.setString(2, ma.getNombre());
             stmt.setInt(3, ma.getProfesor_id());
@@ -97,7 +97,7 @@ public class AsignaturaBBDD implements AsignaturaDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
-            PreparedStatement stmt = conexion.prepareStatement("delete from asignatura where id='" + id + "'");
+            PreparedStatement stmt = conexion.prepareStatement("delete from asignatura where alumno_id='" + id + "'");
             stmt.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error al editar " + e);

@@ -45,7 +45,7 @@ public class admin extends HttpServlet {
     String asignatura = "Vista/asignatura.jsp";
     String asignaturaN = "Vista/asignaturaN.jsp";
     String asignaturaEdit = "Vista/asignaturaEdit.jsp";
-    
+
     MatriculaBBDD mdao = new MatriculaBBDD();
     MatriculaDTO mat = new MatriculaDTO();
 
@@ -89,14 +89,14 @@ public class admin extends HttpServlet {
 
     protected void insertarM(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
-        String alum_id = request.getParameter("txtAlumno");
-        String asig_id = request.getParameter("txtAsignatura");
-        String tri = request.getParameter("txtTrimestre");
-        String nota = request.getParameter("txtNota");
-        mat.setAlumno_id(Integer.parseInt(alum_id));
-        mat.setAsignatura_id(Integer.parseInt(asig_id));
-        mat.setTrimestre(Integer.parseInt(tri));
-        mat.setNota(Double.parseDouble(nota));
+        String alid = request.getParameter("txtAlumnoid");
+        String asigid = request.getParameter("txtAsignaturaid");
+        String trim = request.getParameter("txtTrimestre");
+        String note = request.getParameter("txtNota");
+        mat.setAlumno_id(Integer.parseInt(alid));
+        mat.setAsignatura_id(Integer.parseInt(asigid));
+        mat.setTrimestre(Integer.parseInt(trim));
+        mat.setNota(Double.parseDouble(note));
         mdao.add(mat);
         rd = request.getRequestDispatcher(acceso);
         rd.forward(request, response);
@@ -105,7 +105,7 @@ public class admin extends HttpServlet {
     protected void editarM(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
         MatriculaBBDD m = new MatriculaBBDD();
-        m.editar(Integer.parseInt(request.getParameter("txtAlumno")), Integer.parseInt(request.getParameter("txtAsignatura")), Integer.parseInt(request.getParameter("txtTrimestre")), Double.parseDouble(request.getParameter("txtNota")));
+        m.editar(Integer.parseInt(request.getParameter("txtAlumnoid")), Integer.parseInt(request.getParameter("txtAsignaturaid")), Integer.parseInt(request.getParameter("txtTrimestre")), Double.parseDouble(request.getParameter("txtNota")));
         rd = request.getRequestDispatcher(acceso);
         rd.forward(request, response);
     }
@@ -137,6 +137,25 @@ public class admin extends HttpServlet {
         rd.forward(request, response);
     }
 
+    protected void insertarA(HttpServletRequest request, HttpServletResponse response, String acceso)
+            throws ServletException, IOException {
+        String a = request.getParameter("txtAlumnoA");
+        String user = request.getParameter("txtUsuarioA");
+        String pass = request.getParameter("txtPassA");
+        String name = request.getParameter("txtNombreA");
+        String apellido = request.getParameter("txtApellidoA");
+        String nivel = request.getParameter("txtNivelId");
+        al.setId(Integer.parseInt(a));
+        al.setUsername(user);
+        al.setPassword(pass);
+        al.setNombre(name);
+        al.setApellido(apellido);
+        al.setIdNivel(Integer.parseInt(nivel));
+        aldao.add(al);
+        rd = request.getRequestDispatcher(acceso);
+        rd.forward(request, response);
+    }
+
     protected void editarA(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
         AlumnoBBDD a = new AlumnoBBDD();
@@ -154,8 +173,8 @@ public class admin extends HttpServlet {
     protected void eliminarA(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idA"));
-        a.setId(id);
-        adao.eliminar(id);
+        al.setId(id);
+        aldao.eliminar(id);
         rd = request.getRequestDispatcher(acceso);
         rd.forward(request, response);
     }
@@ -172,6 +191,27 @@ public class admin extends HttpServlet {
         rd.forward(request, response);
     }
 
+    protected void insertarP(HttpServletRequest request, HttpServletResponse response, String acceso)
+            throws ServletException, IOException {
+        String a = request.getParameter("txtProfesorID");
+        String user = request.getParameter("txtUsuarioP");
+        String pass = request.getParameter("txtPassP");
+        String name = request.getParameter("txtNombreP");
+        String apellido = request.getParameter("txtApellidoP");
+        String email = request.getParameter("txtEmail");
+        String sp = request.getParameter("txtSpecialist");
+        p.setId(Integer.parseInt(a));
+        p.setUsername(user);
+        p.setPassword(pass);
+        p.setName(name);
+        p.setAsignatura(apellido);
+        p.setEmail(email);
+        p.setSpecialist(Integer.parseInt(sp));
+        pdao.add(p);
+        rd = request.getRequestDispatcher(acceso);
+        rd.forward(request, response);
+    }
+
     protected void editarP(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
         ProfesorBBDD p = new ProfesorBBDD();
@@ -182,6 +222,15 @@ public class admin extends HttpServlet {
 
     protected void editarPa(HttpServletRequest request, HttpServletResponse response, String acceso)
             throws ServletException, IOException {
+        rd = request.getRequestDispatcher(acceso);
+        rd.forward(request, response);
+    }
+
+    protected void eliminarP(HttpServletRequest request, HttpServletResponse response, String acceso)
+            throws ServletException, IOException {
+        int idA = Integer.parseInt(request.getParameter("idprof"));
+        p.setId(idA);
+        pdao.eliminar(idA);
         rd = request.getRequestDispatcher(acceso);
         rd.forward(request, response);
     }
@@ -212,6 +261,15 @@ public class admin extends HttpServlet {
         rd.forward(request, response);
     }
 
+    protected void eliminarAsig(HttpServletRequest request, HttpServletResponse response, String acceso)
+            throws ServletException, IOException {
+        int idA = Integer.parseInt(request.getParameter("idasig"));
+        a.setId(idA);
+        adao.eliminar(idA);
+        rd = request.getRequestDispatcher(acceso);
+        rd.forward(request, response);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -231,7 +289,7 @@ public class admin extends HttpServlet {
                 acceso = matriculaN;
                 this.nuevaM(request, response, acceso);
                 break;
-            case "guardarM":
+            case "Guardar":
                 acceso = matricula;
                 this.insertarM(request, response, acceso);
                 break;
@@ -255,9 +313,21 @@ public class admin extends HttpServlet {
                 acceso = alumnoN;
                 this.alumnoN(request, response, acceso);
                 break;
+            case "Guardar Alumno":
+                acceso = alumno;
+                this.insertarA(request, response, acceso);
+                break;
             case "modificarA":
                 acceso = alumnoEdit;
                 this.editarAa(request, response, acceso);
+                break;
+            case "ACTUALIZAR ALUMNO":
+                acceso = alumno;
+                this.editarA(request, response, acceso);
+                break;
+            case "eliminarA":
+                acceso = alumno;
+                this.eliminarA(request, response, acceso);
                 break;
             case "profesor":
                 acceso = profesor;
@@ -267,9 +337,21 @@ public class admin extends HttpServlet {
                 acceso = profesorN;
                 this.profesorN(request, response, acceso);
                 break;
+            case "Guardar Profesor":
+                acceso = profesor;
+                this.insertarM(request, response, acceso);
+                break;
             case "modificarP":
                 acceso = profesorEdit;
                 this.editarAa(request, response, acceso);
+                break;
+            case "ACTUALIZAR PROFESOR":
+                acceso = profesor;
+                this.editarP(request, response, acceso);
+                break;
+            case "eliminarP":
+                acceso = profesor;
+                this.eliminarP(request, response, acceso);
                 break;
             case "asignatura":
                 acceso = asignatura;
@@ -282,6 +364,14 @@ public class admin extends HttpServlet {
             case "modificarAsig":
                 acceso = asignaturaEdit;
                 this.editarAa(request, response, acceso);
+                break;
+            case "ACTUALIZAR ASIGNATURA":
+                acceso = profesor;
+                this.editarP(request, response, acceso);
+                break;
+            case "eliminarAsig":
+                acceso = asignatura;
+                this.eliminarAsig(request, response, acceso);
                 break;
 
         }

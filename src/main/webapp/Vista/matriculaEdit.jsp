@@ -12,7 +12,7 @@
     <jsp:include page="/Componente/adminNav.jsp" />
     <div>
             
-    <form method="post" action="admin">
+    <form action="admin">
 
 
             <div class ="row">

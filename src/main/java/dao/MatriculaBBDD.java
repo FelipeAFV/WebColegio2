@@ -53,7 +53,7 @@ public class MatriculaBBDD implements MatriculaDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
-            PreparedStatement stmt = conexion.prepareStatement("select * from matricula where id="+id_alumno);
+            PreparedStatement stmt = conexion.prepareStatement("select * from matricula where alumno_id="+id_alumno);
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()) {
@@ -95,7 +95,7 @@ public class MatriculaBBDD implements MatriculaDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
-            PreparedStatement stmt = conexion.prepareStatement("update matricula set alumno_id=?, asignatura_id=?,trimestre=?, nota=? where id=?");
+            PreparedStatement stmt = conexion.prepareStatement("update matricula set alumno_id=?, asignatura_id=?,trimestre=?, nota=? where alumno_id=?");
             stmt.setInt(1,id);
             stmt.setInt(2, asignatura_id);
             stmt.setInt(3, trimestre);
@@ -114,7 +114,7 @@ public class MatriculaBBDD implements MatriculaDAO {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
-            PreparedStatement stmt = conexion.prepareStatement("delete from matricula where id="+id_alumno);
+            PreparedStatement stmt = conexion.prepareStatement("delete from matricula where alumno_id="+id_alumno);
             stmt.executeUpdate();
         } catch(ClassNotFoundException | SQLException e) {
             System.out.println("Error al borrar "+e);

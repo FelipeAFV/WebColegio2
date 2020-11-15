@@ -25,7 +25,7 @@
         </tr>
         <%
             ProfesorBBDD p = new ProfesorBBDD();
-            List<ProfesorDTO> list = p.lista();
+            List<ProfesorDTO> list = p.listar();
             Iterator<ProfesorDTO> i = list.iterator();
             ProfesorDTO prof = null;
             while (i.hasNext()) {
@@ -44,7 +44,7 @@
             <td><%=prof.getSpecialist()%></td>
             <th>
                 <a href="admin?action=modificarP&idp=<%= prof.getId()%>&userP=<%= prof.getUsername()%>&passP=<%= prof.getPassword()%>&nombreP=<%= prof.getName()%>&apellidoP=<%= prof.getLast_name()%>&email=<%= prof.getEmail()%>&esp=<%= prof.getSpecialist()%>">Modificar</a>
-                <a href="admin?action=eliminarP&id=<%= prof.getId()%>">Eliminar</a>
+                <a href="admin?action=eliminarP&idprof=<%= prof.getId()%>">Eliminar</a>
             </th>
         </tr>
         <%  }%>

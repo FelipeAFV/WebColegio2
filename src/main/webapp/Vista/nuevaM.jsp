@@ -11,7 +11,7 @@
 <html>
     <jsp:include page="/Componente/adminNav.jsp" />
 
-    <form method="post" action="admin?action=guardarM">
+    <form action="admin">
 
 
             <div class ="row">
@@ -22,7 +22,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-3">Alumno ID</div>
         <div class="col-md-3">
-            <input type="text" name="txtAlumno" class="form-control"  />
+            <input type="text" name="txtAlumnoid" class="form-control"  />
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -30,7 +30,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-3">Asignatura ID</div>
         <div class="col-md-3">
-            <input type="text" name="txtAsignatura" class="form-control"  />
+            <input type="text" name="txtAsignaturaid" class="form-control"  />
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -53,7 +53,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <input type="submit" name="action" value="GUARDAR" class="btn btn-block btn-dark">
+            <input type="submit" name="action" value="Guardar" class="btn btn-block btn-dark">
         </div>
         
         <div class="col-md-3"></div>
