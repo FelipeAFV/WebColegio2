@@ -232,22 +232,23 @@ public class AlumnoBBDD implements AlumnoDAO {
     }
 
     @Override
-    public boolean edit(AlumnoDTO userA) {
+    public boolean editar(int id,String username,String password,String nombre,String apellido,int nivel) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM", "progra", "Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("update alumno set usuario='" + userA.getUsername()
-                    + "',password='" + userA.getPassword()
-                    + "',Idnivel='" + userA.getIdNivel()
-                    + "',nombre='" + userA.getNombre()
-                    + "',apellido='" + userA.getApellido()
-                    + "'where id='" + userA.getId() + "'");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
+            PreparedStatement stmt = conexion.prepareStatement("update alumno set id=?, login=?,clave=?, nombre=?,apellido=?,nivel_id=? where id=?");
+            stmt.setInt(1,id);
+            stmt.setString(2, username);
+            stmt.setString(3, password);
+            stmt.setString(4, nombre);
+            stmt.setString(5, apellido);
+            stmt.setInt(6,nivel);
             stmt.executeUpdate();
-
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error al editar " + e);
+            return true;
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar "+e);
+            return false;
         }
-        return false;
     }
 
     @Override

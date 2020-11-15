@@ -16,7 +16,7 @@ public class ProfesorDTO extends User{
     private String name;
     private String last_name;
     private String email;
-    private String specialist;
+    private int specialist;
     private String asignatura;
     
     public ProfesorDTO(){
@@ -58,11 +58,11 @@ public class ProfesorDTO extends User{
         this.email = email;
     }
 
-    public String getSpecialist() {
+    public int getSpecialist() {
         return specialist;
     }
 
-    public void setSpecialist(String specialist) {
+    public void setSpecialist(int specialist) {
         this.specialist = specialist;
     }
     

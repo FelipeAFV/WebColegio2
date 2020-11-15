@@ -6,26 +6,27 @@ package modelo;
  * @author jvarg
  */
 public class MatriculaDTO {
-    private AlumnoDTO alumno;
-    private AsignaturaDTO asignatura;
+    private int alumno_id;
+    private int asignatura_id;
     private int trimestre;
     private double nota;
 
-    public AlumnoDTO getAlumno() {
-        return alumno;
+    public int getAlumno_id() {
+        return alumno_id;
     }
 
-    public void setAlumno(AlumnoDTO alumno) {
-        this.alumno = alumno;
+    public void setAlumno_id(int alumno_id) {
+        this.alumno_id = alumno_id;
     }
 
-    public AsignaturaDTO getAsignatura() {
-        return asignatura;
+    public int getAsignatura_id() {
+        return asignatura_id;
     }
 
-    public void setAsignatura(AsignaturaDTO asignatura) {
-        this.asignatura = asignatura;
+    public void setAsignatura_id(int asignatura_id) {
+        this.asignatura_id = asignatura_id;
     }
+
 
     public int getTrimestre() {
         return trimestre;

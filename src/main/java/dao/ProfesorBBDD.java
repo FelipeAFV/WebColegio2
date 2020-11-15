@@ -100,7 +100,7 @@ public class ProfesorBBDD implements ProfesorDAO{
 
        
     //Metodos para el admin
-    
+
 
     @Override
     public ProfesorDTO list(int id) {
@@ -119,7 +119,7 @@ public class ProfesorBBDD implements ProfesorDAO{
                 pf.setName(rs.getString("nombre"));
                 pf.setLast_name(rs.getString("apellido"));
                 pf.setEmail(rs.getString("email"));
-                pf.setSpecialist(rs.getString("especialidad"));
+                pf.setSpecialist(rs.getInt("especialidad"));
                 
             }
         } catch(ClassNotFoundException | SQLException e) {
@@ -150,25 +150,7 @@ public class ProfesorBBDD implements ProfesorDAO{
         
     }
 
-    @Override
-    public boolean edit(ProfesorDTO userP) {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("update profesor set usuario='"+userP.getUsername()
-                +"',password='"+userP.getPassword()
-                +"',nombre='"+userP.getName()
-                +"',apellido='"+userP.getLast_name()
-                +"',email='"+userP.getEmail()
-                +"',especialidad='"+userP.getSpecialist()
-                +"'where id='"+userP.getId()+"'");
-            stmt.executeUpdate();
-                    
-        } catch(ClassNotFoundException | SQLException e) {
-            System.out.println("Error al editar "+e);
-        }
-        return false;
-    }
+
 
     @Override
     public boolean eliminar(int id) {
@@ -203,6 +185,53 @@ public class ProfesorBBDD implements ProfesorDAO{
             return false;
         }
 
+    }
+
+    @Override
+    public List lista() {
+        ArrayList<ProfesorDTO> list = new ArrayList<>();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
+            //Connection conexion = Conexion.obtenerConexion();
+            PreparedStatement stmt = conexion.prepareStatement("SELECT * FROM profesor");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ProfesorDTO pr = new ProfesorDTO();
+                pr.setId(rs.getInt(1));
+                pr.setUsername(rs.getString(2));
+                pr.setPassword(rs.getString(3));
+                pr.setName(rs.getString(4));
+                pr.setLast_name(rs.getString(5));
+                pr.setEmail(rs.getString(6));
+                pr.setSpecialist(rs.getInt(7));
+                list.add(pr);
+            }
+            return list;
+        } catch (SQLException |ClassNotFoundException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean editar(int id, String username, String password, String nombre, String apellido, String email, int esp) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
+            PreparedStatement stmt = conexion.prepareStatement("update profesor set id=?, login=?,clave=?, nombre=?,apellido=?,email=?,especialista=? where id=?");
+            stmt.setInt(1,id);
+            stmt.setString(2, username);
+            stmt.setString(3, password);
+            stmt.setString(4, nombre);
+            stmt.setString(5, apellido);
+            stmt.setString(6,email);
+            stmt.setInt(7,esp);
+            stmt.executeUpdate();
+            return true;
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar "+e);
+            return false;
+    }
     }
     
 }
