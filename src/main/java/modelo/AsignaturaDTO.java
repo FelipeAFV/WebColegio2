@@ -11,7 +11,6 @@ package modelo;
  */
 public class AsignaturaDTO {
     private int id;
-    private int nivel_id;
     private int profesor_id;
     private String nombre;
     
@@ -27,13 +26,6 @@ public class AsignaturaDTO {
         this.id = id;
     }
 
-    public int getNivel_id() {
-        return nivel_id;
-    }
-
-    public void setNivel_id(int nivel_id) {
-        this.nivel_id = nivel_id;
-    }
 
     public int getProfesor_id() {
         return profesor_id;

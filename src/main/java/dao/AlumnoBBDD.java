@@ -214,19 +214,21 @@ public class AlumnoBBDD implements AlumnoDAO {
     }
 
     @Override
-    public boolean add(AlumnoDTO userA) {
+    public boolean add(AlumnoDTO a) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM", "progra", "Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("Insert into alumno(usuario, password, nombre, apellido) values('"
-                    + userA.getUsername() + "','"
-                    + userA.getPassword() + "','"
-                    + userA.getIdNivel() + "','"
-                    + userA.getNombre() + "','"
-                    + userA.getApellido()
-                    + "')");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
+            PreparedStatement stmt = conexion.prepareStatement("Insert into alumno(id, login, clave, nombre,apellido,nivel_id) values(?,?,?,?,?,?)");
+            stmt.setInt(1, a.getId());
+            stmt.setString(2, a.getUsername());
+            stmt.setString(3, a.getPassword());
+            stmt.setString(4, a.getNombre());
+            stmt.setString(5, a.getApellido());
+            stmt.setInt(6, a.getIdNivel());  
             stmt.executeUpdate();
-        } catch (ClassNotFoundException | SQLException e) {
+
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("error "+e);
         }
         return false;
     }

@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.Connection;
@@ -10,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.AsignaturaDTO;
 
+public class AsignaturaBBDD implements AsignaturaDAO {
 
-public class AsignaturaBBDD implements AsignaturaDAO{
     AsignaturaDTO asi = new AsignaturaDTO();
+
     @Override
     public List listar() {
         ArrayList<AsignaturaDTO> list = new ArrayList<>();
@@ -30,43 +30,79 @@ public class AsignaturaBBDD implements AsignaturaDAO{
                 list.add(as);
             }
             return list;
-        } catch (SQLException |ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             return null;
         }
     }
 
     @Override
     public AsignaturaDTO list(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AsignaturaDTO as = new AsignaturaDTO();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
+            PreparedStatement stmt = conexion.prepareStatement("select * from asignatura where id=" + id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                as.setId(rs.getInt(1));
+                as.setNombre(rs.getString(2));
+                as.setProfesor_id(rs.getInt(3));
+
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error al conectar" + e);
+        }
+        return as;
     }
 
     @Override
     public boolean add(AsignaturaDTO ma) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean editar(int asignatura_id,String nombre,int idprofe) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
+            PreparedStatement stmt = conexion.prepareStatement("Insert into asignatura(id, nombre, profesor_id) values(?,?,?,?)");
+            stmt.setInt(1, ma.getId());
+            stmt.setString(2, ma.getNombre());
+            stmt.setInt(3, ma.getProfesor_id());
+            stmt.executeUpdate();
+
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("error "+e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editar(int asignatura_id, String nombre, int idprofe) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
             PreparedStatement stmt = conexion.prepareStatement("update asignatura set id=?, nombre=?,profesor_id=? where id=?");
-            stmt.setInt(1,asignatura_id);
+            stmt.setInt(1, asignatura_id);
             stmt.setString(2, nombre);
             stmt.setInt(3, idprofe);
             stmt.executeUpdate();
             return true;
-        } catch(ClassNotFoundException | SQLException e) {
-            System.out.println("Error al editar "+e);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar " + e);
             return false;
-    }
-        
+        }
+
     }
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "admini", "12345");
+            PreparedStatement stmt = conexion.prepareStatement("delete from asignatura where id='" + id + "'");
+            stmt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error al editar " + e);
+        }
+        return false;
     }
-    
-    
+
 }

@@ -25,7 +25,7 @@
         </tr>
         <%
             ProfesorBBDD p = new ProfesorBBDD();
-            List<ProfesorDTO> list = p.listar();
+            List<ProfesorDTO> list = p.lista();
             Iterator<ProfesorDTO> i = list.iterator();
             ProfesorDTO prof = null;
             while (i.hasNext()) {

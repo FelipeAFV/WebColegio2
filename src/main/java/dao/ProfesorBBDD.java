@@ -130,21 +130,22 @@ public class ProfesorBBDD implements ProfesorDAO{
     }
 
     @Override
-    public boolean add(ProfesorDTO userP) {
+    public boolean add(ProfesorDTO p) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1525:BBDDSAM","progra","Humano12");
-            PreparedStatement stmt = conexion.prepareStatement("Insert into profesor(usuario, password, nombre, apellido, email, especialidad) values('"
-                
-                +userP.getUsername()+"','"
-                +userP.getPassword()+"','"
-                +userP.getName()+"','"
-                +userP.getLast_name()+"','"
-                +userP.getEmail()+"','"
-                +userP.getSpecialist()
-                +"')");
+            Connection  conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","admini","12345");
+            PreparedStatement stmt = conexion.prepareStatement("Insert into profesor(id, login, clave, nombre,apellido,email,especialista) values(?,?,?,?,?,?,?)");
+            stmt.setInt(1, p.getId());
+            stmt.setString(2, p.getUsername());
+            stmt.setString(3, p.getPassword());
+            stmt.setString(4, p.getName());
+            stmt.setString(5, p.getLast_name());
+            stmt.setString(6, p.getEmail());
+            stmt.setInt(7, p.getSpecialist());
             stmt.executeUpdate();
+
         } catch(ClassNotFoundException | SQLException e) {
+            System.out.println("error "+e);
         }
         return false;
         

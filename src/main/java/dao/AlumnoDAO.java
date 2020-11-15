@@ -26,7 +26,7 @@ public interface AlumnoDAO {
     //Para el admin
     public List listar();
     public AlumnoDTO list(int id);
-    public boolean add(AlumnoDTO userA);
+    public boolean add(AlumnoDTO a);
     public boolean editar(int id,String username,String password,String nombre,String apellido,int nivel);
     public boolean eliminar(int id);
     

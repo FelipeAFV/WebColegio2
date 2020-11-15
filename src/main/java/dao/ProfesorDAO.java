@@ -21,7 +21,7 @@ public interface ProfesorDAO {
     //Para el admin
     public ProfesorDTO list(int id);
     public List lista();
-    public boolean add(ProfesorDTO userP);
+    public boolean add(ProfesorDTO p);
     public boolean editar(int id,String username,String password,String nombre,String apellido,String email, int esp);
     public boolean eliminar(int id);
 
